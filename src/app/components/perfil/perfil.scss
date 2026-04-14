@@ -1,0 +1,13 @@
+.perfil-header {
+  text-align: center; margin-bottom: 30px;
+  .circle-img { width: 100px; height: 100px; background: #1e1e1e; border: 2px solid #00ff88; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; img { width: 60%; } }
+}
+.stats {
+  display: flex; justify-content: space-between; margin-bottom: 30px;
+  .st-item { background: #1e1e1e; padding: 15px; border-radius: 15px; width: 28%; text-align: center; strong { color: #00ff88; display: block; font-size: 20px; } span { color: #888; font-size: 12px; } }
+}
+.info-box {
+  background: #1e1e1e; border-radius: 20px; padding: 10px;
+  .row { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #333; span { color: #888; } }
+}
+.btn-qr { width: 100%; padding: 16px; background: #00ff88; border: none; border-radius: 15px; font-weight: bold; margin-top: 25px; cursor: pointer; }

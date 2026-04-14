@@ -1,0 +1,7 @@
+.container { padding: 20px; }
+.card {
+  background: #1e1e1e; padding: 15px; border-radius: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px;
+  .icon-v { font-size: 24px; }
+  .desc { flex: 1; h4 { margin: 0; } p { margin: 5px 0 0; color: #888; } }
+  .check { color: #00ff88; }
+}

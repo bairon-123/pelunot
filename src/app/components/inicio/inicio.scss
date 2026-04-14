@@ -1,0 +1,26 @@
+.container { padding: 20px; color: white; }
+.header {
+  display: flex; justify-content: space-between; margin-bottom: 30px;
+  h1 { font-size: 24px; margin: 5px 0; }
+  p { color: #888; margin: 0; }
+  .avatar-user { 
+    width: 45px; height: 45px; background: #1e1e1e; border: 1px solid #333;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #00ff88;
+  }
+}
+.pet-card {
+  background: #1e1e1e; border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 15px; border: 1px solid #333;
+  .pet-img { width: 60px; height: 60px; background: #2c2c2c; border-radius: 50%; padding: 10px; }
+  h3 { margin: 0; }
+  p { color: #888; font-size: 14px; margin: 5px 0; }
+  .badge-status { background: rgba(0, 255, 136, 0.1); color: #00ff88; padding: 4px 10px; border-radius: 8px; font-size: 12px; }
+}
+.upcoming {
+  margin-top: 30px;
+  .item {
+    background: #1e1e1e; padding: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; margin-top: 10px;
+    h4 { margin: 0; }
+    p { margin: 5px 0 0; color: #888; font-size: 13px; }
+    .btn-tag.next { background: #2c2c2c; color: #f1c40f; border: none; padding: 5px 12px; border-radius: 10px; font-size: 12px; }
+  }
+}
