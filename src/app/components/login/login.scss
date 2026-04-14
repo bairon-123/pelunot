@@ -86,20 +86,28 @@
 
 .btn-primary {
   width: 100%;
-  padding: 16px;
-  background-color: #00ff88; 
-  color: #000000;
+  padding: 14px;
+  background-color: #00ff88; // Verde neón
+  color: #000;
   border: none;
   border-radius: 12px;
-  font-size: 16px;
-  font-weight: 700;
+  font-weight: bold;
+  margin-bottom: 10px; // Espacio entre botones
   cursor: pointer;
-  margin-top: 10px;
-  transition: transform 0.2s, background-color 0.2s;
+}
 
+.btn-secondary {
+  width: 100%;
+  padding: 14px;
+  background-color: transparent;
+  color: #00ff88;
+  border: 2px solid #00ff88; // Solo borde verde
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  
   &:hover {
-    background-color: #00e67a;
-    transform: translateY(-2px);
+    background-color: rgba(0, 255, 136, 0.1);
   }
 }
 

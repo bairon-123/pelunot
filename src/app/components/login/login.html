@@ -3,10 +3,15 @@
     <div class="logo-section">
       <img src="image/pelunot_foto.jpg" alt="Logo Pelunot" class="logo">
       <h1>Pelunot</h1>
-      <p>Bienvenido de vuelta</p>
+      <p>Gestión de Vacunas</p>
     </div>
 
     <form class="login-form">
+      <div class="input-field">
+        <label>Nombre</label>
+        <input type="text" [(ngModel)]="nombre" name="nombre" placeholder="Solo para nuevos usuarios">
+      </div>
+
       <div class="input-field">
         <label>Email</label>
         <input type="email" [(ngModel)]="email" name="email" placeholder="tu@correo.com">
@@ -17,13 +22,16 @@
         <input type="password" [(ngModel)]="password" name="password" placeholder="********">
       </div>
 
-      <button type="button" class="btn-primary" (click)="ingresar()">
+      <button type="button" class="btn-primary" (click)="login()">
         Iniciar Sesión
       </button>
 
+      <button type="button" class="btn-secondary" (click)="registrarse()">
+        Crear Cuenta Nueva
+      </button>
+
       <div class="footer-links">
-        <a (click)="recuperarClave()">¿Olvidaste tu contraseña?</a>
-        <a routerLink="/register">Crear una cuenta</a>
+        <a (click)="recuperarClave()" style="cursor: pointer;">¿Olvidaste tu contraseña?</a>
       </div>
     </form>
   </div>

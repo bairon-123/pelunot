@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth'; // Asegúrate que la ruta sea correcta según tu carpeta
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-login',
@@ -12,52 +12,71 @@ import { AuthService } from '../../services/auth'; // Asegúrate que la ruta sea
   styleUrl: './login.scss'
 })
 export class LoginComponent {
-  // Inyectamos las dependencias
+  // Inyección de servicios
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  // Variables para el formulario
+  // Variables vinculadas al HTML mediante [(ngModel)]
   nombre: string = '';
   email: string = '';
   password: string = '';
 
   /**
-   * Esta función se ejecuta al hacer clic en el botón "Entrar" o "Iniciar Sesión"
-   * Realiza el registro y la creación del perfil en Firestore
+   * FUNCIÓN PARA ENTRAR (Usuarios ya registrados)
+   * Solo valida email y contraseña
    */
-  async ingresar() {
-    // Validamos que los campos no estén vacíos
-    if (this.nombre.trim() && this.email.trim() && this.password.trim()) {
+  async login() {
+    if (this.email.trim() && this.password.trim()) {
       try {
-        console.log('Intentando registrar a:', this.nombre);
-        
-        // Llamamos al servicio para crear el usuario
-        await this.authService.register(this.email, this.password, this.nombre);
-        
-        // Si todo sale bien, navegamos al Home
-        console.log('Registro exitoso');
+        await this.authService.login(this.email, this.password);
+        console.log('Login exitoso');
         this.router.navigate(['/home/inicio']);
-        
       } catch (error: any) {
-        // Manejo de errores básicos
         console.error('Error al iniciar sesión:', error);
-        if (error.code === 'auth/email-already-in-use') {
-          alert('Este correo ya está en uso. Intenta iniciar sesión.');
-        } else {
-          alert('Ocurrió un error: ' + error.message);
-        }
+        alert('Credenciales incorrectas. Verifica tu correo y contraseña.');
       }
     } else {
-      alert('Por favor, completa todos los campos (Nombre, Email y Contraseña)');
+      alert('Por favor, ingresa tu email y contraseña para entrar.');
     }
   }
 
-  // Función para recuperar contraseña (opcional por ahora)
+  /**
+   * FUNCIÓN PARA CREAR CUENTA (Usuarios nuevos)
+   * Valida Nombre, Email y Contraseña, y los guarda en Firestore
+   */
+  async registrarse() {
+    if (this.nombre.trim() && this.email.trim() && this.password.trim()) {
+      try {
+        console.log('Creando cuenta para:', this.nombre);
+        await this.authService.register(this.email, this.password, this.nombre);
+        
+        alert('¡Cuenta creada con éxito!');
+        this.router.navigate(['/home/inicio']);
+      } catch (error: any) {
+        console.error('Error en el registro:', error);
+        
+        // Mensajes amigables para errores comunes de Firebase
+        if (error.code === 'auth/email-already-in-use') {
+          alert('Este correo ya está registrado. Intenta iniciar sesión.');
+        } else if (error.code === 'auth/weak-password') {
+          alert('La contraseña es muy débil. Usa al menos 6 caracteres.');
+        } else {
+          alert('Error al crear la cuenta: ' + error.message);
+        }
+      }
+    } else {
+      alert('Para registrarte necesito tu Nombre, Email y una Contraseña.');
+    }
+  }
+
+  /**
+   * Recuperación de contraseña
+   */
   recuperarClave() {
     if (this.email) {
-      alert('Se ha enviado un enlace de recuperación a: ' + this.email);
+      alert('Se ha enviado un correo de recuperación a: ' + this.email);
     } else {
-      alert('Por favor, ingresa tu correo electrónico primero.');
+      alert('Ingresa tu correo en el campo de arriba para enviarte el enlace.');
     }
   }
 }
