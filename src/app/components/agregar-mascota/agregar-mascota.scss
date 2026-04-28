@@ -1,0 +1,101 @@
+$bg-color: #121212;
+$card-bg: #1e1e1e;
+$neon: #00ff88;
+$text-sec: #aaa;
+
+.form-container {
+  padding: 20px;
+  background-color: $bg-color;
+  min-height: 100vh;
+  color: white;
+
+  .form-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    
+    .btn-back {
+      background: none;
+      border: none;
+      color: $neon;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    h1 { font-size: 22px; font-weight: 800; margin: 0; }
+  }
+}
+
+.pet-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 40px;
+}
+
+.form-section {
+  background: $card-bg;
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid #333;
+
+  .section-title {
+    font-size: 14px;
+    color: $neon;
+    margin-bottom: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+.input-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 12px;
+    color: $text-sec;
+    font-weight: 600;
+  }
+
+  input, select, textarea {
+    background: #2a2a2a;
+    border: 1px solid #444;
+    padding: 12px;
+    border-radius: 12px;
+    color: white;
+    font-size: 15px;
+    outline: none;
+
+    &:focus {
+      border-color: $neon;
+    }
+  }
+
+  textarea { height: 70px; resize: none; }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn-save {
+  background: $neon;
+  color: #121212;
+  border: none;
+  padding: 16px;
+  border-radius: 15px;
+  font-weight: 800;
+  font-size: 16px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+  cursor: pointer;
+  
+  &:active { transform: scale(0.98); }
+}

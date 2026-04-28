@@ -1,11 +1,44 @@
-<div class="container">
-  <h2>Historial de Vacunas</h2>
-  <div class="card" *ngFor="let v of [1,2,3]">
-    <div class="icon-v">💉</div>
-    <div class="desc">
-      <h4>Sextuple Canina</h4>
-      <p>Aplicada el 10 Ene 2026</p>
+<div class="vacunas-container">
+  <header class="header">
+    <h1>Control Sanitario</h1>
+    <p>Historial y próximas vacunas</p>
+  </header>
+
+  <section class="add-vacuna">
+    <h3>Registrar Vacuna</h3>
+    <div class="form-grid">
+      <select [(ngModel)]="nuevaVacuna.mascotaId">
+        <option value="" disabled>Selecciona mascota</option>
+        <option *ngFor="let m of mascotas" [value]="m.id">{{m.nombre}}</option>
+      </select>
+      
+      <input type="text" [(ngModel)]="nuevaVacuna.nombre" placeholder="Nombre Vacuna (Ej: Antirrábica)">
+      <input type="text" [(ngModel)]="nuevaVacuna.clinica" placeholder="Clínica / Veterinario">
+      <input type="date" [(ngModel)]="nuevaVacuna.fecha">
+      
+      <select [(ngModel)]="nuevaVacuna.estado">
+        <option value="Completada">Completada</option>
+        <option value="Pendiente">Pendiente / Próxima</option>
+      </select>
+      
+      <button class="btn-save" (click)="registrarVacuna()">Registrar Vacuna</button>
     </div>
-    <span class="check">✔️</span>
-  </div>
+  </section>
+
+  <section class="vacuna-list">
+    <div class="vacuna-card" *ngFor="let v of vacunas" [class.pending]="v.estado === 'Pendiente'">
+      <div class="card-main">
+        <div class="icon">💉</div>
+        <div class="info">
+          <h4>{{ v.nombre }}</h4>
+          <p class="pet-tag">🐾 {{ v.mascotaNombre }}</p>
+          <p class="date-tag">📅 {{ v.fecha | date:'dd MMMM, yyyy' }}</p>
+          <p class="clinic-tag" *ngIf="v.clinica">🏥 {{ v.clinica }}</p>
+        </div>
+        <div class="status-container">
+          <span class="status-tag">{{ v.estado }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

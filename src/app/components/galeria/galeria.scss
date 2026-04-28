@@ -1,6 +1,214 @@
-.grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px;
+$bg-dark: #121212;
+$card-bg: #1e1e1e;
+$neon-green: #00ff88;
+$text-gray: #888888;
+$warning-yellow: #f1c40f;
+
+.section-container {
+  padding: 20px;
+  background: #121212;
+  min-height: calc(100vh - 140px);
+  animation: fadeIn 0.4s ease;
 }
-.photo-placeholder {
-  aspect-ratio: 1 / 1; background: #1e1e1e; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 30px;
+
+.section-header {
+  margin-bottom: 20px;
+
+  .section-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+
+    span {
+      color: #00ff88;
+      text-shadow: 0 0 10px rgba(0,255,136,0.2);
+    }
+  }
+
+  .section-subtitle {
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: #888888;
+  }
+}
+
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+
+  button {
+    background: #2c2c2c;
+    border: 1px solid #333;
+    color: #888888;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+
+    &.active {
+      background: #00ff88;
+      color: #121212;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(0,255,136,0.3);
+    }
+  }
+}
+
+.upload-zone {
+  text-align: center;
+  margin-bottom: 20px;
+
+  .btn-upload {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #00ff88;
+    color: #121212;
+    padding: 12px 18px;
+    border-radius: 16px;
+    font-weight: 800;
+    cursor: pointer;
+
+    &.disabled {
+      background: #444;
+      color: #888;
+      cursor: not-allowed;
+    }
+  }
+
+  .warning-text {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #f1c40f;
+  }
+}
+
+.progress-container {
+  width: 100%;
+  height: 6px;
+  background: #2c2c2c;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+
+  .progress-bar {
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(90deg, #00ff88, transparent);
+    animation: progressMove 1s infinite linear;
+  }
+}
+
+@keyframes progressMove {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #2c2c2c;
+  aspect-ratio: 1 / 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .photo-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 6px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    text-align: center;
+
+    span {
+      font-size: 0.7rem;
+      color: #ffffff;
+    }
+  }
+}
+.photo-viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+
+  .viewer-content {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .btn-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    .image-zoom-container {
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+      
+      .zoom-img {
+        width: 100%;
+        display: block;
+        transition: transform 0.3s ease;
+        &:hover {
+          transform: scale(1.1); 
+        }
+      }
+    }
+
+    .viewer-actions {
+      display: flex;
+      justify-content: center;
+
+      .btn-delete {
+        background: rgba(255, 68, 68, 0.2);
+        color: #ff4444;
+        border: 1px solid #ff4444;
+        padding: 12px 30px;
+        border-radius: 15px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        
+        &:hover {
+          background: #ff4444;
+          color: white;
+        }
+      }
+    }
+  }
 }

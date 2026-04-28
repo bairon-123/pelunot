@@ -1,0 +1,99 @@
+<div class="page-container">
+  <div class="header-row">
+    <div class="title-group">
+      <h1>Gestión de Usuarios</h1>
+      <p class="subtitle">Administra los perfiles y mascotas de la plataforma</p>
+    </div>
+
+    <div class="tools-group">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          [(ngModel)]="filtroBusqueda" 
+          placeholder="Buscar por nombre o email...">
+      </div>
+      
+      <div class="actions-line">
+        <button class="btn-refresh" (click)="refrescarDatos()">
+          <span class="icon">🔄</span> Refrescar
+        </button>
+        <div class="stats-badge">
+          Total: {{ usuarios.length }} usuarios
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Rol</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of usuariosFiltrados" [class.selected-row]="usuarioSeleccionado?.uid === user.uid">
+          <td>
+            <div class="user-info">
+              <div class="avatar-mini">{{ user.nombre?.charAt(0).toUpperCase() || 'U' }}</div>
+              <span class="name-text">{{ user.nombre }}</span>
+            </div>
+          </td>
+          <td>{{ user.email }}</td>
+          <td>
+            <span class="role-badge" [ngClass]="user.rol">
+              {{ user.rol }}
+            </span>
+          </td>
+          <td>
+            <div class="actions-cell">
+              <button class="btn-action view" (click)="verDetalles(user)" title="Ver Mascotas">
+                👁️ Mascotas
+              </button>
+              <button class="btn-action edit" [routerLink]="['/admin/usuario-editar', user.uid]" title="Editar Perfil">
+                ✏️ Editar
+              </button>
+              <button class="btn-action delete" *ngIf="user.rol !== 'superadmin'" (click)="eliminarUsuario(user.uid)" title="Eliminar">
+                🗑️
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="no-results" *ngIf="usuariosFiltrados.length === 0 && filtroBusqueda">
+      No se encontraron resultados para "{{ filtroBusqueda }}"
+    </div>
+  </div>
+
+  <div class="pets-detail-panel" *ngIf="usuarioSeleccionado" [@fadeIn]>
+    <div class="panel-header">
+      <div class="panel-title">
+        <h3>Mascotas de {{ usuarioSeleccionado.nombre }}</h3>
+        <span class="count-tag">{{ mascotasDelUsuario.length }} registradas</span>
+      </div>
+      <button class="btn-close" (click)="usuarioSeleccionado = null">Cerrar Detalle ×</button>
+    </div>
+
+    <div class="pet-admin-grid" *ngIf="mascotasDelUsuario.length > 0; else noPets">
+      <div class="pet-admin-card" *ngFor="let pet of mascotasDelUsuario">
+        <div class="pet-icon">🐾</div>
+        <div class="pet-data">
+          <span class="pet-name">{{ pet.nombre }}</span>
+          <span class="pet-specie">{{ pet.especie }} • {{ pet.raza }}</span>
+          <span class="pet-age">{{ pet.edad }} años</span>
+        </div>
+        <button class="btn-mini-delete" (click)="borrarMascotaAdmin(pet.id)">🗑️</button>
+      </div>
+    </div>
+
+    <ng-template #noPets>
+      <div class="empty-state">Este usuario no tiene mascotas registradas.</div>
+    </ng-template>
+  </div>
+</div>

@@ -1,13 +1,108 @@
+$bg-dark: #121212;
+$card-bg: #1e1e1e;
+$neon: #00ff88;
+
+.perfil-container {
+  padding: 20px;
+  background-color: $bg-dark;
+  color: white;
+  min-height: 100vh;
+}
+
 .perfil-header {
-  text-align: center; margin-bottom: 30px;
-  .circle-img { width: 100px; height: 100px; background: #1e1e1e; border: 2px solid #00ff88; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; img { width: 60%; } }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+
+  h1 { font-size: 24px; font-weight: 800; color: $neon; margin: 0; }
+  .btn-edit {
+    background: #2a2a2a;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
 }
-.stats {
-  display: flex; justify-content: space-between; margin-bottom: 30px;
-  .st-item { background: #1e1e1e; padding: 15px; border-radius: 15px; width: 28%; text-align: center; strong { color: #00ff88; display: block; font-size: 20px; } span { color: #888; font-size: 12px; } }
+
+.info-card {
+  background: $card-bg;
+  border-radius: 24px;
+  padding: 25px;
+  border: 1px solid #333;
+  margin-bottom: 30px;
+
+  .form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    label { font-size: 12px; color: $neon; font-weight: bold; }
+    input {
+      background: #2a2a2a;
+      border: 1px solid #444;
+      padding: 12px;
+      border-radius: 12px;
+      color: white;
+      outline: none;
+      &:focus { border-color: $neon; }
+    }
+  }
+
+  .btn-save {
+    width: 100%;
+    background: $neon;
+    color: #121212;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 800;
+    margin-top: 10px;
+    cursor: pointer;
+  }
 }
-.info-box {
-  background: #1e1e1e; border-radius: 20px; padding: 10px;
-  .row { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #333; span { color: #888; } }
+
+.user-main {
+  text-align: center;
+  margin-bottom: 20px;
+  .avatar-large {
+    width: 70px; height: 70px; background: #333;
+    border-radius: 50%; margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: $neon; border: 2px solid $neon;
+  }
 }
-.btn-qr { width: 100%; padding: 16px; background: #00ff88; border: none; border-radius: 15px; font-weight: bold; margin-top: 25px; cursor: pointer; }
+
+.contact-details {
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  .detail-item {
+    margin-bottom: 12px;
+    label { font-size: 11px; color: #888; text-transform: uppercase; }
+    p { margin: 2px 0 0; font-size: 15px; }
+  }
+}
+
+.pet-mini-card {
+  background: #2a2a2a;
+  padding: 12px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+
+  .pet-img { width: 45px; height: 45px; background: #333; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .pet-name {
+    flex: 1;
+    h4 { margin: 0; font-size: 14px; }
+    p { margin: 0; font-size: 12px; color: #888; }
+  }
+  .btn-qr {
+    background: none; border: 1px solid $neon; color: $neon;
+    padding: 5px 10px; border-radius: 8px; font-size: 11px;
+  }
+}

@@ -1,31 +1,56 @@
-<div class="container">
-  <header class="header">
-    <div class="greeting">
-      <p>Hola, Bairon 👋</p>
-      <h1>Mis mascotas</h1>
-    </div>
-    <div class="avatar-user">B</div>
-  </header>
+<div class="section-container">
+  <div class="section-header">
+    <h2 class="section-title"><span>Mis Mascotas</span></h2>
+  </div>
 
-  <div class="pet-card" routerLink="/home/perfil">
-    <div class="pet-img">
-      <img src="assets/perro_icon.png" alt="Rocky">
-    </div>
-    <div class="pet-info">
-      <h3>Rocky</h3>
-      <p>Golden Retriever • 3 años</p>
-      <span class="badge-status">Al día</span>
+  <div class="pet-grid" *ngIf="!loading">
+    <div class="pet-card" *ngFor="let m of mascotas" (click)="abrirDetalle(m)">
+      <div class="pet-img">
+        <img [src]="m.fotoUrl || 'https://placehold.co/200x200?text=Sin+Foto'" alt="Mascota">
+      </div>
+      <div class="pet-info">
+        <h3>{{ m.nombre }}</h3>
+        <p>{{ m.especie }} • {{ m.raza }}</p>
+        <span class="badge-status">Ver detalles</span>
+      </div>
     </div>
   </div>
 
-  <section class="upcoming">
-    <h3>Próximas vacunas</h3>
-    <div class="item">
-      <div>
-        <h4>Antirrábica</h4>
-        <p>15 mayo 2026</p>
+  <div class="modal-overlay" *ngIf="mascotaSeleccionada" (click)="cerrarModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="cerrarModal()">×</button>
+      
+      <div class="modal-body">
+        <div class="profile-header">
+          <div class="main-photo">
+            <img [src]="mascotaSeleccionada.fotoUrl || 'image/pelunot_foto.jpg'">
+  
+            <button class="edit-photo-btn" (click)="mostrarSelectorFotos = !mostrarSelectorFotos">
+            📷
+            </button>
+          </div>
+          <h2>{{ mascotaSeleccionada.nombre }}</h2>
+        </div>
+
+        <div class="gallery-selector" *ngIf="mostrarSelectorFotos">
+          <h4>Elige una foto de su galería:</h4>
+          <div class="mini-grid">
+            <img *ngFor="let f of fotosGaleriaMascota" 
+                 [src]="f.url" 
+                 (click)="cambiarFotoPerfil(f.url)">
+          </div>
+          <p *ngIf="fotosGaleriaMascota.length === 0" class="no-photos">
+            No hay fotos en la galería para esta mascota.
+          </p>
+        </div>
+
+        <div class="info-details" *ngIf="!mostrarSelectorFotos">
+          <div class="data-row"><span>Raza:</span> {{ mascotaSeleccionada.raza }}</div>
+          <div class="data-row"><span>Edad:</span> {{ mascotaSeleccionada.edad }} años</div>
+          <div class="data-row"><span>Sexo:</span> {{ mascotaSeleccionada.sexo }}</div>
+          <div class="data-row"><span>Salud:</span> {{ mascotaSeleccionada.salud }}</div>
+        </div>
       </div>
-      <button class="btn-tag next">Próxima</button>
     </div>
-  </section>
+  </div>
 </div>

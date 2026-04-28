@@ -1,0 +1,32 @@
+<div class="page-container">
+  <div class="header-dashboard">
+    <h1>Resumen del Sistema</h1>
+    <p>Estadísticas en tiempo real de Pelunot</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="card card-users">
+      <span class="card-icon">👥</span>
+      <div class="card-info">
+        <h3>Usuarios Registrados</h3>
+        <p>{{ totalUsuarios }}</p>
+      </div>
+    </div>
+
+    <div class="card card-pets">
+      <span class="card-icon">🐾</span>
+      <div class="card-info">
+        <h3>Mascotas Totales</h3>
+        <p>{{ totalMascotas }}</p>
+      </div>
+    </div>
+
+    <div class="card card-vaccines">
+      <span class="card-icon">💉</span>
+      <div class="card-info">
+        <h3>Vacunas Pendientes</h3>
+        <p>{{ vacunasPendientes }}</p>
+      </div>
+    </div>
+  </div>
+</div>

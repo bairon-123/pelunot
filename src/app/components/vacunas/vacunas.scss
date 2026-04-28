@@ -1,7 +1,161 @@
-.container { padding: 20px; }
-.card {
-  background: #1e1e1e; padding: 15px; border-radius: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px;
-  .icon-v { font-size: 24px; }
-  .desc { flex: 1; h4 { margin: 0; } p { margin: 5px 0 0; color: #888; } }
-  .check { color: #00ff88; }
+.vacunas-container {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.786);
+  min-height: calc(100vh - 140px);
+  animation: fadeIn 0.5s ease;
+}
+
+
+.header {
+  margin-bottom: 25px;
+
+  h1 {
+    color: #00ff88;
+    font-size: 26px;
+    font-weight: 800;
+    margin: 0;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: rgba(0, 255, 136, 0.2);
+      margin-top: 6px;
+      border-radius: 10px;
+    }
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 6px;
+    font-size: 14px;
+  }
+}
+
+.add-vacuna {
+  background: rgba(0, 255, 136, 0.1);
+  padding: 20px;
+  border-radius: 24px;
+  border: 1px solid #333;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+
+  h3 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+  }
+
+  .form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    input, select {
+      background: #2c2c2c;
+      border: 1px solid #333;
+      color: white;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+
+      &:focus {
+        outline: none;
+        border-color: rgba(0, 255, 136, 0.2);
+        box-shadow: 0 0 8px rgba(0,255,136,0.2);
+      }
+    }
+
+    .btn-save {
+      margin-top: 10px;
+      background: rgba(0, 255, 136, 0.2);
+      color: rgba(0, 255, 136, 0.2);
+      border: none;
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s;
+
+      &:active {
+        transform: scale(0.97);
+      }
+    }
+  }
+}
+
+.vacuna-list {
+  margin-top: 20px;
+}
+
+.vacuna-card {
+  background: rgba(0, 255, 136, 0.1);
+  border-radius: 22px;
+  padding: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #333;
+  border-left: 5px solid rgba(0, 255, 136, 0.2);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.4);
+  transition: 0.2s;
+
+  &.pending {
+    border-left-color: rgba(241,196,15,0.2);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  .card-main {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .icon {
+    font-size: 28px;
+    background: #2c2c2c;
+    width: 55px;
+    height: 55px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .info {
+    flex: 1;
+
+    h4 {
+      margin: 0;
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 3px 0;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .status-container {
+    .status-tag {
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(0,255,136,0.1);
+      color: rgba(0, 255, 136, 0.2);
+    }
+  }
+
+  &.pending .status-tag {
+    background: rgba(241,196,15,0.1);
+    color: rgba(241,196,15,0.2);
+  }
 }

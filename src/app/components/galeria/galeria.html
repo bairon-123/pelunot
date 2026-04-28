@@ -1,8 +1,42 @@
-<div class="container">
-  <h2>Galería de mi mascota</h2>
-  <div class="grid">
-    <div class="photo-placeholder" *ngFor="let p of [1,2,3,4,5,6]">
-      <span>📸</span>
+<div class="section-container">
+  <div class="section-header">
+    <h2 class="section-title"><span>Galería de Recuerdos</span></h2>
+    <p class="section-subtitle">{{ fotos.length }} / 10 fotos guardadas</p>
+  </div>
+
+  <div class="filter-bar">
+    <button [class.active]="filtroMascotaId === ''" (click)="cargarFotos('')">Todas</button>
+    <button *ngFor="let pet of mascotas" [class.active]="filtroMascotaId === pet.id" (click)="cargarFotos(pet.id)">
+      {{ pet.nombre }}
+    </button>
+  </div>
+
+  <div class="upload-zone" *ngIf="fotos.length < 10">
+    <label class="btn-upload" [class.disabled]="!filtroMascotaId">
+      <span>📸</span> {{ subiendo ? 'Subiendo...' : 'Agregar Foto' }}
+      <input type="file" (change)="subirImagen($event)" accept="image/*" [disabled]="!filtroMascotaId || subiendo" hidden>
+    </label>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item" *ngFor="let foto of fotos" (click)="abrirVisor(foto)">
+      <img [src]="foto.url" loading="lazy">
+    </div>
+  </div>
+
+  <div class="photo-viewer" *ngIf="fotoSeleccionada" (click)="cerrarVisor()">
+    <div class="viewer-content" (click)="$event.stopPropagation()">
+      <button class="btn-close" (click)="cerrarVisor()">×</button>
+      
+      <div class="image-zoom-container">
+        <img [src]="fotoSeleccionada.url" class="zoom-img">
+      </div>
+
+      <div class="viewer-actions">
+        <button class="btn-delete" (click)="eliminarFoto()">
+          <span>🗑️</span> Eliminar
+        </button>
+        </div>
     </div>
   </div>
 </div>

@@ -1,24 +1,42 @@
-<div class="home-wrapper">
-  <div class="main-content">
-    <router-outlet></router-outlet>
-  </div>
+<div class="app-wrapper">
+  <header class="top-bar">
+    <div class="user-info">
+      <div class="user-avatar">{{ inicial }}</div>
+      <div class="user-greeting">
+        <p>Hola, <span>{{ nombreUsuario }}</span></p>
+      </div>
+    </div>
 
-  <nav class="bottom-nav">
+
+    <button class="logout-btn" (click)="logout()" title="Cerrar Sesión">
+      Cerrar Sesión
+      <span class="icon">🚪</span>
+    </button>
+  </header>
+
+  <main class="content-view">
+    <router-outlet></router-outlet>
+  </main>
+
+  <nav class="bottom-navbar">
     <a routerLink="inicio" routerLinkActive="active" class="nav-item">
       <span class="icon">🏠</span>
-      <span>Inicio</span>
+      <span class="label">Inicio</span>
     </a>
     <a routerLink="vacunas" routerLinkActive="active" class="nav-item">
       <span class="icon">💉</span>
-      <span>Vacunas</span>
+      <span class="label">Vacunas</span>
     </a>
+    <div class="add-pet-circle" routerLink="agregar-mascota">
+      <span class="plus">+</span>
+    </div>
     <a routerLink="galeria" routerLinkActive="active" class="nav-item">
       <span class="icon">🖼️</span>
-      <span>Galería</span>
+      <span class="label">Galería</span>
     </a>
     <a routerLink="perfil" routerLinkActive="active" class="nav-item">
       <span class="icon">👤</span>
-      <span>Perfil</span>
+      <span class="label">Perfil</span>
     </a>
   </nav>
 </div>

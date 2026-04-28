@@ -1,0 +1,33 @@
+<div class="pet-detail-container" *ngIf="pet">
+  <div class="hero-image">
+    <img [src]="pet.fotoUrl || 'assets/image/pelunot_foto.jpg'">
+    <div class="overlay">
+      <h1>{{pet.nombre}}</h1>
+      <span>{{pet.raza}}</span>
+    </div>
+  </div>
+
+  <div class="details-grid">
+    <div class="detail-card">
+      <h3>🆔 Identificación</h3>
+      <p><strong>Sexo:</strong> {{pet.sexo}}</p>
+      <p><strong>Edad:</strong> {{pet.edad}}</p>
+      <p><strong>Pelaje:</strong> {{pet.pelaje}}</p>
+      <p><strong>Microchip:</strong> {{pet.microchip || 'No registrado'}}</p>
+    </div>
+
+    <div class="detail-card">
+      <h3>🧠 Comportamiento</h3>
+      <p><strong>Alimentación:</strong> {{pet.alimentacion}}</p>
+      <p><strong>Energía:</strong> {{pet.energia}}</p>
+      <p><strong>Sociabilidad:</strong> {{pet.sociabilidad}}</p>
+    </div>
+
+    <div class="detail-card full">
+      <h3>🏥 Salud</h3>
+      <p><strong>Peso:</strong> {{pet.peso}}</p>
+      <p><strong>Clínica:</strong> {{pet.clinica}}</p>
+      <p><strong>Señas:</strong> {{pet.senas}}</p>
+    </div>
+  </div>
+</div>

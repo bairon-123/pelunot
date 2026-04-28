@@ -1,0 +1,124 @@
+<div class="form-container">
+  <header class="form-header">
+    <button class="btn-back" (click)="cancelar()">←</button>
+    <h1>Registrar Mascota</h1>
+  </header>
+
+  <form (ngSubmit)="guardarMascota()" class="pet-form">
+    
+    <section class="form-section">
+      <h2 class="section-title">🆔 Identificación</h2>
+      
+      <div class="input-group">
+        <label>Nombre de la mascota</label>
+        <input type="text" [(ngModel)]="mascota.nombre" name="nombre" placeholder="Ej: Rocky" required>
+      </div>
+
+      <div class="row">
+        <div class="input-group">
+          <label>Especie</label>
+          <select [(ngModel)]="mascota.especie" name="especie">
+            <option value="Perro">Perro</option>
+            <option value="Gato">Gato</option>
+            <option value="Ave">Ave</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Sexo / Estado</label>
+          <select [(ngModel)]="mascota.sexo" name="sexo">
+            <option value="Macho">Macho</option>
+            <option value="Hembra">Hembra</option>
+            <option value="Macho - Castrado">Macho - Castrado</option>
+            <option value="Hembra - Esterilizada">Hembra - Esterilizada</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Raza</label>
+        <input type="text" [(ngModel)]="mascota.raza" name="raza" placeholder="Ej: Golden Retriever">
+      </div>
+
+      <div class="row">
+        <div class="input-group">
+          <label>Edad Estimada</label>
+          <input type="text" [(ngModel)]="mascota.edad" name="edad" placeholder="Ej: 3 años">
+        </div>
+        <div class="input-group">
+          <label>Pelaje (Color/Patrón)</label>
+          <input type="text" [(ngModel)]="mascota.pelaje" name="pelaje" placeholder="Ej: Jaspeado, Sólido">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Señas particulares</label>
+        <textarea [(ngModel)]="mascota.senas" name="senas" placeholder="Manchas, cicatrices notables..."></textarea>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <h2 class="section-title">🧠 Comportamiento</h2>
+      
+      <div class="input-group">
+        <label>Hábitos alimenticios</label>
+        <input type="text" [(ngModel)]="mascota.alimentacion" name="alimentacion" placeholder="Tipo de alimento y frecuencia">
+      </div>
+
+      <div class="row">
+        <div class="input-group">
+          <label>Nivel de energía</label>
+          <select [(ngModel)]="mascota.energia" name="energia">
+            <option value="Bajo">Bajo</option>
+            <option value="Medio">Medio</option>
+            <option value="Alto">Alto</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Sociabilidad</label>
+          <input type="text" [(ngModel)]="mascota.sociabilidad" name="sociabilidad" placeholder="Con personas u otros animales">
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <h2 class="section-title">🏥 Salud y Microchip</h2>
+      
+      <div class="row">
+        <div class="input-group">
+          <label>Peso Actual</label>
+          <input type="text" [(ngModel)]="mascota.peso" name="peso" placeholder="Ej: 15kg">
+        </div>
+        <div class="input-group">
+          <label>Última Desparasitación</label>
+          <input type="date" [(ngModel)]="mascota.ultimaDespar" name="ultimaDespar">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Vacunas Vigentes</label>
+        <input type="text" [(ngModel)]="mascota.vacunas" name="vacunas" placeholder="Rabia, Séxtuple, etc.">
+      </div>
+
+      <div class="input-group">
+        <label>Alergias o Enfermedades</label>
+        <textarea [(ngModel)]="mascota.salud" name="salud" placeholder="Alergias conocidas o medicación crónica"></textarea>
+      </div>
+
+      <div class="row">
+        <div class="input-group">
+          <label>N° Microchip (15 dgt)</label>
+          <input type="text" [(ngModel)]="mascota.microchip" name="microchip" maxlength="15" placeholder="000000000000000">
+        </div>
+        <div class="input-group">
+          <label>Clínica / Veterinario</label>
+          <input type="text" [(ngModel)]="mascota.clinica" name="clinica" placeholder="Nombre de referencia">
+        </div>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button type="submit" class="btn-save">Guardar Mascota</button>
+    </div>
+  </form>
+</div>

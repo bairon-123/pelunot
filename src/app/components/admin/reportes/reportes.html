@@ -1,0 +1,26 @@
+<div class="page-container">
+  <div class="header-section">
+    <h1>Informes y Reportes</h1>
+    <p>Descarga la información de la base de datos en formato Excel (.xlsx)</p>
+  </div>
+
+  <div class="report-grid">
+    <div class="report-card">
+      <div class="card-icon">👥</div>
+      <h3>Usuarios Nuevos</h3>
+      <p>Listado completo de clientes y administradores registrados.</p>
+      <button class="btn-download" (click)="descargarReporteUsuarios()">
+        📥 Descargar Excel
+      </button>
+    </div>
+
+    <div class="report-card">
+      <div class="card-icon">💉</div>
+      <h3>Control de Vacunas</h3>
+      <p>Reporte detallado de vacunas aplicadas y recordatorios.</p>
+      <button class="btn-download" (click)="descargarReporteVacunas()">
+        📥 Descargar Excel
+      </button>
+    </div>
+  </div>
+</div>

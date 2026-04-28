@@ -1,0 +1,29 @@
+<div class="page-container">
+  <h1>Editar Perfil de Usuario</h1>
+  
+  <div class="edit-card">
+    <div class="input-group">
+      <label>Nombre Completo</label>
+      <input type="text" [(ngModel)]="usuario.nombre">
+    </div>
+
+    <div class="input-group">
+      <label>Correo Electrónico</label>
+      <input type="email" [(ngModel)]="usuario.email">
+    </div>
+
+    <div class="input-group">
+      <label>Rol del Sistema</label>
+      <select [(ngModel)]="usuario.rol">
+        <option value="user">Usuario (Cliente)</option>
+        <option value="admin">Administrador</option>
+        <option value="superadmin">SuperAdmin</option>
+      </select>
+    </div>
+
+    <div class="actions">
+      <button class="btn-save" (click)="guardarCambios()">Guardar Cambios</button>
+      <button class="btn-cancel" routerLink="/admin/usuarios">Cancelar</button>
+    </div>
+  </div>
+</div>

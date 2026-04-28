@@ -1,26 +1,228 @@
-.container { padding: 20px; color: white; }
-.header {
-  display: flex; justify-content: space-between; margin-bottom: 30px;
-  h1 { font-size: 24px; margin: 5px 0; }
-  p { color: #888; margin: 0; }
-  .avatar-user { 
-    width: 45px; height: 45px; background: #1e1e1e; border: 1px solid #333;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #00ff88;
+/* VARIABLES */
+$bg-dark: #121212;
+$card-bg: #1e1e1e;
+$neon-green: #00ff88;
+$text-gray: #888888;
+$warning-yellow: #f1c40f;
+$modal-overlay: rgba(0, 0, 0, 0.85);
+
+/* ESTILOS BASE Y CONTENEDORES */
+.section-container {
+  padding: 20px;
+  animation: fadeIn 0.5s ease;
+  background-color: $bg-dark;
+  min-height: calc(100vh - 140px);
+}
+
+.section-header {
+  margin-bottom: 25px;
+  padding-left: 5px;
+
+  .section-title {
+    font-size: 28px;
+    margin: 0;
+    color: white;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+
+    span {
+      color: $neon-green;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+    }
+  }
+
+  .section-subtitle {
+    margin: 8px 0 0;
+    color: $text-gray;
+    font-size: 14px;
+    letter-spacing: 0.2px;
   }
 }
+
+/* TARJETAS DE MASCOTA */
 .pet-card {
-  background: #1e1e1e; border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 15px; border: 1px solid #333;
-  .pet-img { width: 60px; height: 60px; background: #2c2c2c; border-radius: 50%; padding: 10px; }
-  h3 { margin: 0; }
-  p { color: #888; font-size: 14px; margin: 5px 0; }
-  .badge-status { background: rgba(0, 255, 136, 0.1); color: #00ff88; padding: 4px 10px; border-radius: 8px; font-size: 12px; }
-}
-.upcoming {
-  margin-top: 30px;
-  .item {
-    background: #1e1e1e; padding: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; margin-top: 10px;
-    h4 { margin: 0; }
-    p { margin: 5px 0 0; color: #888; font-size: 13px; }
-    .btn-tag.next { background: #2c2c2c; color: #f1c40f; border: none; padding: 5px 12px; border-radius: 10px; font-size: 12px; }
+  background: $card-bg;
+  border-radius: 24px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #333;
+  margin-bottom: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:active { transform: scale(0.96); }
+
+  .pet-img {
+    width: 65px;
+    height: 65px;
+    background: #2c2c2c;
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
+
+  .pet-info {
+    flex: 1;
+    h3 { margin: 0; font-size: 1.1rem; font-weight: 700; color: white; }
+    p { color: $text-gray; font-size: 0.9rem; margin: 4px 0 8px; }
+    .badge-status {
+      display: inline-block;
+      background: rgba(0, 255, 136, 0.1);
+      color: $neon-green;
+      padding: 4px 12px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}
+
+/* NUEVOS CAMBIOS: MODAL DE DETALLE */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: $modal-overlay;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: $card-bg;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 30px;
+  padding: 25px;
+  position: relative;
+  border: 1px solid #333;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: $text-gray;
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+    &:hover { color: white; }
+  }
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+
+  .main-photo {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid $neon-green;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+    }
+
+    .edit-photo-btn {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: $neon-green;
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s;
+      &:active { transform: scale(0.9); }
+    }
+  }
+
+  h2 { color: white; margin: 0; font-size: 1.5rem; }
+}
+
+/* SELECTOR DE GALERÍA DENTRO DEL MODAL */
+.gallery-selector {
+  animation: fadeIn 0.4s ease;
+  
+  h4 { color: $neon-green; font-size: 0.9rem; margin-bottom: 10px; text-transform: uppercase; }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 5px;
+
+    /* Scrollbar personalizada */
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
+    img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      &:hover { border-color: $neon-green; transform: scale(1.05); }
+    }
+  }
+}
+
+.info-details {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 18px;
+  border-radius: 20px;
+  
+  .data-row {
+    margin-bottom: 10px;
+    color: #eee;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+
+    &:last-child { margin-bottom: 0; }
+
+    span {
+      color: $neon-green;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+  }
+}
+
+/* ANIMACIONES */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
