@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
     try {
       await signOut(this.auth);
       console.log('Sesión cerrada');
+      localStorage.removeItem('user_session');
       this.router.navigate(['/login']);
     } catch (error) {
       console.error('Error al cerrar sesión', error);

@@ -1,0 +1,61 @@
+<div class="main-container" *ngIf="!loading && mascota; else loadingTemplate">
+  
+  <div class="profile-header">
+    <div class="image-container">
+      <img [src]="mascota.fotoUrl || 'assets/logo.png'" alt="Foto mascota" class="pet-image">
+    </div>
+    <h1 class="pet-name">{{ mascota.nombre }}</h1>
+    <p class="pet-breed">{{ mascota.especie }} | {{ mascota.raza }}</p>
+  </div>
+
+  <div class="info-grid">
+    
+    <div class="info-card">
+      <h3><i class="fas fa-dog"></i> Datos Físicos</h3>
+      <div class="detail"><span>Sexo:</span> {{ mascota.sexo }}</div>
+      <div class="detail"><span>Edad:</span> {{ mascota.edad }} años</div>
+      <div class="detail"><span>Peso:</span> {{ mascota.peso }} kg</div>
+      <div class="detail"><span>Pelaje:</span> {{ mascota.pelaje }}</div>
+      <div class="detail"><span>Microchip:</span> {{ mascota.microchip || 'No tiene' }}</div>
+    </div>
+
+    <div class="info-card">
+      <h3><i class="fas fa-heartbeat"></i> Salud y Cuidados</h3>
+      <div class="detail"><span>Alimentación:</span> {{ mascota.alimentacion }}</div>
+      <div class="detail"><span>Clínica:</span> {{ mascota.clinica }}</div>
+      <div class="detail"><span>Salud/Alergias:</span> {{ mascota.salud }}</div>
+      <div class="detail"><span>Señas:</span> {{ mascota.senas }}</div>
+      <div class="detail"><span>Última Desp.:</span> {{ mascota.ultimaDespar || 'Pendiente' }}</div>
+    </div>
+
+    <div class="info-card">
+      <h3><i class="fas fa-smile"></i> Personalidad</h3>
+      <div class="detail"><span>Energía:</span> {{ mascota.energia }}</div>
+      <div class="detail"><span>Sociabilidad:</span> {{ mascota.sociabilidad }}</div>
+    </div>
+
+    <div class="info-card owner-card" *ngIf="dueno">
+      <h3><i class="fas fa-user-shield"></i> Contacto de Emergencia</h3>
+      <div class="detail"><span>Dueño:</span> {{ dueno.nombre }}</div>
+      <div class="detail"><span>Comuna:</span> {{ dueno.comuna }}</div>
+      <a [href]="'tel:' + dueno.telefono" class="btn-call">
+        <i class="fas fa-phone"></i> LLAMAR AL DUEÑO
+      </a>
+    </div>
+  </div>
+
+  <div class="vacunas-container" *ngIf="vacunas.length > 0">
+    <h3>Historial de Vacunas</h3>
+    <div class="vacuna-item" *ngFor="let v of vacunas">
+      <span class="v-nombre">{{ v.nombre }}</span>
+      <span class="v-fecha">{{ v.fecha | date:'dd/MM/yyyy' }}</span>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="loading-box">
+    <div class="spinner"></div>
+    <p>Consultando ficha clínica de la mascota...</p>
+  </div>
+</ng-template>

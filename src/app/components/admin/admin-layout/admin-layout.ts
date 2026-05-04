@@ -16,7 +16,7 @@ export class AdminLayoutComponent {
 
 cerrarSesion() {
   if(confirm('¿Estás seguro que deseas salir?')) {
-    this.authService.logout();
+    localStorage.removeItem('user_session');
     this.router.navigate(['/login']);
   }
 }

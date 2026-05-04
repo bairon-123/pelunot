@@ -23,9 +23,11 @@ export class LoginComponent {
 async login() {
   if (this.nombre.trim() && this.email.trim() && this.password.trim()) {
     try {
-
       const resultado = await this.authService.loginConValidacionNombre(this.email, this.password, this.nombre);
-            const rol = resultado.rol;
+      const rol = resultado.rol;
+
+      // --- AGREGAR ESTO: Guardamos el estado de sesión ---
+      localStorage.setItem('user_session', 'active'); 
 
       console.log('Usuario autenticado con rol:', rol);
       if (rol === 'superadmin' || rol === 'admin') {
@@ -33,7 +35,6 @@ async login() {
       } else {
         this.router.navigate(['/home/inicio']);
       }
-
     } catch (error: any) {
       console.error('Error login:', error);
       alert(error.message || 'Error al iniciar sesión. Revisa tus datos.');

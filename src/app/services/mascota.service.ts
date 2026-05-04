@@ -10,7 +10,8 @@ import {
   addDoc,
   getDoc,
   deleteDoc,
-  updateDoc
+  updateDoc,
+  getDocs
 } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
@@ -96,11 +97,10 @@ export class MascotaService {
 
     return addDoc(collection(this.firestore, 'mascotas'), payload);
   }
-
   async getMascotaById(id: string) {
-    const petRef = doc(this.firestore, 'mascotas', id);
-    return getDoc(petRef);
-  }
+  const petRef = doc(this.firestore, `mascotas/${id}`);
+  return await getDoc(petRef);
+ }
 
   async eliminarMascota(idMascota: string) {
     const mascotaDocRef = doc(this.firestore, 'mascotas', idMascota);
@@ -189,7 +189,18 @@ getFotosGaleria(mascotaId?: string): Observable<any[]> {
     };
     return addDoc(collection(this.firestore, 'galeria'), fotoData);
   }
+
+// Obtener perfil de cualquier usuario por ID (usado en vista pública)
+  async getPerfilPublico(uid: string) {
+    const userRef = doc(this.firestore, 'usuarios', uid);
+    return getDoc(userRef);
+  }
+
+
+async getVacunasByMascotaId(mascotaId: string) {
+  const vacunasRef = collection(this.firestore, 'vacunas');
+  const q = query(vacunasRef, where('mascotaId', '==', mascotaId));
+  const snap = await getDocs(q); // Asegúrate de importar getDocs de @angular/fire/firestore
+  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }
-
-
-
+}

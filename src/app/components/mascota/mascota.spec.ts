@@ -1,22 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Mascota } from './mascota';
+import { MascotasComponent } from './mascota';
 
 describe('Mascota', () => {
-  let component: Mascota;
-  let fixture: ComponentFixture<Mascota>;
+  let component: MascotasComponent;
+  let fixture: ComponentFixture<MascotasComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Mascota],
+      // 3. Cambia la importación del componente standalone
+      imports: [MascotasComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Mascota);
+    // 4. Crea el componente correcto
+    fixture = TestBed.createComponent(MascotasComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges(); // Es mejor usar detectChanges() aquí
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
+

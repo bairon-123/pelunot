@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AgregarMascota } from './agregar-mascota';
+import { AgregarMascotaComponent } from './agregar-mascota';
 
 describe('AgregarMascota', () => {
-  let component: AgregarMascota;
-  let fixture: ComponentFixture<AgregarMascota>;
+  let component: AgregarMascotaComponent;
+  let fixture: ComponentFixture<AgregarMascotaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AgregarMascota],
+      imports: [AgregarMascotaComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AgregarMascota);
+    fixture = TestBed.createComponent(AgregarMascotaComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

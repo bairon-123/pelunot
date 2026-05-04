@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Vacunas } from './vacunas';
+import { VacunasComponent } from './vacunas';
 
 describe('Vacunas', () => {
-  let component: Vacunas;
-  let fixture: ComponentFixture<Vacunas>;
+  let component: VacunasComponent;
+  let fixture: ComponentFixture<VacunasComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Vacunas],
+      imports: [VacunasComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Vacunas);
+    fixture = TestBed.createComponent(VacunasComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
@@ -20,3 +20,4 @@ describe('Vacunas', () => {
     expect(component).toBeTruthy();
   });
 });
+

@@ -1,14 +1,18 @@
-import { Component, OnInit, inject, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MascotaService } from '../../services/mascota.service';
 import { Auth, authState, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+// 1. CAMBIAMOS LA IMPORTACIÓN A LA LIBRERÍA MODERNA
+import { QRCodeComponent } from 'angularx-qrcode';
+
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  // 2. USAMOS QRCodeModule AQUÍ
+  imports: [CommonModule, FormsModule, QRCodeComponent], 
   templateUrl: './perfil.html',
   styleUrl: './perfil.scss'
 })
@@ -17,7 +21,6 @@ export class PerfilComponent implements OnInit {
   private auth = inject(Auth);
   private router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
-  private zone = inject(NgZone);
 
   usuario: any = {
     nombre: '',
@@ -30,6 +33,11 @@ export class PerfilComponent implements OnInit {
   mascotas: any[] = [];
   editando: boolean = false;
   cargando: boolean = true;
+
+  // --- TUS VARIABLES SE MANTIEENEN ---
+  mostrarModalQR: boolean = false;
+  qrValue: string = '';
+  mascotaNombreQR: string = '';
 
   ngOnInit() {
     authState(this.auth).subscribe(currentUser => {
@@ -63,12 +71,10 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-
   toggleEdicion() {
     this.editando = !this.editando;
     this.cdr.detectChanges();
   }
-
 
   async guardarCambios() {
     try {
@@ -85,25 +91,27 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-
   generarQR(mascota: any) {
-    console.log('Generando QR para:', mascota.nombre);
-
-    const infoMascota = `Mascota: ${mascota.nombre}\nDueño: ${this.usuario.nombre}\nContacto: ${this.usuario.telefono}`;
+    const baseUrl = window.location.origin; 
+    this.qrValue = `${baseUrl}/publico/mascota/${mascota.id}`;
+    this.mascotaNombreQR = mascota.nombre;
     
-    alert(`CÓDIGO DE IDENTIFICACIÓN GENERADO\n\n${infoMascota}\n\nEste código permitirá que otros escaneen a ${mascota.nombre} si se extravía.`);
+    this.mostrarModalQR = true;
+    this.cdr.detectChanges();
+  }
+
+  cerrarModal() {
+    this.mostrarModalQR = false;
+    this.cdr.detectChanges();
   }
 
   async logout() {
-    if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
-      try {
-        await signOut(this.auth);
-        this.router.navigate(['/login']);
-      } catch (error) {
-        console.error('Error logout:', error);
-      }
+    try {
+      await signOut(this.auth);
+      localStorage.removeItem('user_session'); 
+      this.router.navigate(['/login']);
+    } catch (error) {
+      console.error('Error al cerrar sesión', error);
     }
   }
 }
-
-

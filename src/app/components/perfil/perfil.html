@@ -1,9 +1,12 @@
 <div class="perfil-container">
   <header class="perfil-header">
     <h1>{{ editando ? 'Editar Perfil' : 'Mi Perfil' }}</h1>
-    <button class="btn-edit" (click)="toggleEdicion()">
-      {{ editando ? 'Cancelar' : '✏️ Editar' }}
-    </button>
+    <div style="display: flex; gap: 10px;">
+      <button class="btn-edit" (click)="toggleEdicion()">
+        {{ editando ? 'Cancelar' : '✏️ Editar' }}
+      </button>
+      <button *ngIf="!editando" class="btn-edit" (click)="logout()" style="color: #ff4444;">Salir</button>
+    </div>
   </header>
 
   <section class="info-card" *ngIf="!editando && !cargando">
@@ -46,7 +49,7 @@
   </section>
 
   <section class="mascotas-list" *ngIf="!editando">
-    <h3>Mis Mascotas ({{ mascotas.length }})</h3>
+    <h3 style="margin-bottom: 15px;">Mis Mascotas ({{ mascotas.length }})</h3>
     <div class="pet-mini-card" *ngFor="let pet of mascotas">
       <div class="pet-img">🐾</div>
       <div class="pet-name">
@@ -56,4 +59,28 @@
       <button class="btn-qr" (click)="generarQR(pet)">Generar QR</button>
     </div>
   </section>
+
+  <div class="modal-qr" *ngIf="mostrarModalQR" (click)="cerrarModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h4>ID QR: {{ mascotaNombreQR }}</h4>
+        <button (click)="cerrarModal()">✕</button>
+      </div>
+      
+      <div class="qr-box">
+        <qrcode
+          [qrdata]="qrValue"
+          [width]="200"
+          [errorCorrectionLevel]="'M'"
+          [elementType]="'canvas'">
+        </qrcode>
+      </div>
+
+      <p class="qr-hint">Al escanear, se mostrará tu contacto de emergencia.</p>
+      
+      <button class="btn-save" style="margin-top: 10px;" onclick="window.print()">
+        Imprimir Código
+      </button>
+    </div>
+  </div>
 </div>
